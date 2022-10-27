@@ -17,6 +17,9 @@ dotenv.config({
 //2 crar el objeto aplicacion
 const app = express()
 
+//habilitar express para cargar datos content-type json
+app.use(express.json())
+
 //conectar a db
 connectDB()
 

@@ -14,31 +14,44 @@ exports.getUsers = async (req, res) =>{
     })
 }
 
-exports.getSingleUser = (req, res)=>{
+exports.getSingleUser = async (req, res)=>{
+    const singleUser = await User.findByPk(req.params.id)
     res.status(200)
     .json({
         "success":true,
-        "data": `Single user ${req.params.id}`
+        "data": singleUser
     })
 }
 
-exports.createUser = (req, res)=>{
+exports.createUser = async (req, res)=>{
+    const newUser = await User.create(req.body)
     res.status(201)
     .json({
         "success":true,
-        "data": "Create user"
+        "data": newUser
     })
 }
 
-exports.updateUser = (req, res)=>{
+exports.updateUser = async (req, res)=>{
+    await User.update(req.body,{
+        where:{
+            id: req.params.id
+        }
+    })
+    const singleUser = await User.findByPk(req.params.id)
     res.status(200)
     .json({
         "success":true,
-        "data": `Update user ${req.params.id}`
+        "data": singleUser
     })
 }
 
-exports.deleteUser = (req, res)=>{
+exports.deleteUser = async (req, res)=>{
+    await User.destroy({
+        where:{
+            id: req.params.id
+        }
+    })
     res.status(200)
     .json({
         "success":true,

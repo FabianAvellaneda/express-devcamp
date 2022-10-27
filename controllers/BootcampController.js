@@ -1,4 +1,12 @@
-exports.getBootcamps = (req, res) =>{
+const DataTypes = require('sequelize')
+const bootcamp = require('../models/bootcamp')
+const sequelize = require('../config/seq')
+
+//Objeto user:
+const Bootcamp = bootcamp (sequelize, DataTypes)
+
+exports.getBootcamps = async (req, res) =>{
+    const allBootcamps = await Bootcamp.findAll()
     res.status(200)
     .json({
         "success":true,
