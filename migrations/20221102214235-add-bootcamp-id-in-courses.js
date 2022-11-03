@@ -11,7 +11,7 @@ module.exports = {
     await queryInterface.addColumn('courses','bootcamp_id',{
       type:Sequelize.INTEGER,
       references:{
-        model: 'courses',
+        model: 'bootcamps',
         key: 'id'
       },
       onUpdate: 'CASCADE',
