@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     rating: DataTypes.REAL
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'Review',
   });
   return Review;

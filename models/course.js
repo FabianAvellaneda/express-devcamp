@@ -14,13 +14,99 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Course.init({
-    tittle: DataTypes.STRING,
-    description: DataTypes.STRING,
-    weeks: DataTypes.INTEGER,
-    enroll_cost: DataTypes.REAL,
-    minimum_skill: DataTypes.STRING
+    tittle:{
+    type: DataTypes.STRING,
+    allowNull:false,
+    unique:true,
+    validate:{
+      notEmpty:{
+        args: true,
+        msg: "title no debe estar vacio"
+      },
+      notNull: {
+        args: true,
+        msg: "title no presente"
+      }
+    }
+    },
+    description:{ 
+    type:DataTypes.STRING,
+    allowNull:false,
+    unique:true,
+    validate:{
+      notEmpty:{
+        args: true,
+        msg: "title no debe estar vacio"
+      },
+      notNull: {
+        args: true,
+        msg: "title no presente"
+      }
+    }
+  }, 
+  weeks:{ 
+      type:DataTypes.INTEGER,
+      allowNull:false,
+      unique:true,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: "title no debe estar vacio"
+        },
+        notNull: {
+          args: true,
+          msg: "title no presente"
+        },
+        isInt:{
+          args: true,
+          msg: "Solo numeros enteros"
+        },
+        max: 9,
+        min: 0
+      }
+  },
+     enroll_cost:{ 
+      type:DataTypes.REAL,
+      allowNull:false,
+      unique:true,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: "title no debe estar vacio"
+        },
+        notNull: {
+          args: true,
+          msg: "title no presente"
+        },
+        isFloat:{
+          args: true,
+          msg: "Solo pueden ingresarse valores tipo float"
+        }
+      }
+  },
+    minimum_skill:{ 
+      type:DataTypes.STRING,
+      allowNull:false,
+      unique:true,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: "title no debe estar vacio"
+        },
+        notNull: {
+          args: true,
+          msg: "title no presente"
+        },
+        isAlpha:{
+          args: true,
+        msg: "Minimum skills solo debe contener letras"
+        }
+      }
+  },
+    bootcamp_id: DataTypes.INTEGER
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'Course',
   });
   return Course;
